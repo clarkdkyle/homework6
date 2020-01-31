@@ -31,7 +31,6 @@ $("#srchBtn").on("click", function () {
       currentconditions(response);
       currentforecast(response);
       show();
-
     })
 });
 
@@ -55,7 +54,6 @@ function currentforecast() {
     for (let i = 0; i < results.length; i++) {
        let day = Number(results[i].dt_txt.split('-')[2].split(' ')[0]);
        let hour = results[i].dt_txt.split('-')[2].split(' ')[1];
-     
 
       if (results[i].dt_txt.indexOf("12:00:00") !== -1) {
 
@@ -64,15 +62,11 @@ function currentforecast() {
         let Fahr = Math.floor(temp);
 
         const card = $("<div>").addClass("card col-md-2 ml-4 bg-info");
-
         const body = $("<div>").addClass("card-body p-3 forecastBody")
         const image = $("<img>").attr("src", "https://openweathermap.org/img/w/" + results[i].weather[0].icon + ".png")
         const cityday = $("<h4>").addClass("card-title").text(date.toLocaleDateString('en-US'));
         const humid = $("<p>").addClass("card-text forecastHumidity").text("Humidity: " + results[i].main.humidity + "%");
         const temper = $("<p>").addClass("card-text forecastTemp").text("Temperature: " + Fahr + " °F");
-
-
-
 
         body.append(cityday, image, temper, humid);
         card.append(body);
@@ -82,7 +76,6 @@ function currentforecast() {
     }
   });
 }
-
 
 function currentconditions(response) {
 
@@ -102,13 +95,9 @@ function currentconditions(response) {
   const wind = $("<p>").addClass("card-text current-wind").text("Wind Speed: " + response.wind.speed + " MPH");
   const humid = $("<p>").addClass("card-text current-humidity").text("Humidity: " + response.main.humidity + "%");
 
-
   // add to page
   city.append(cityday, image)
   body.append(city, temper, humid, wind);
   card.append(body);
   $("#theCity").append(card)
 }
-
-
-
